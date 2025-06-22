@@ -7,6 +7,8 @@ import com.xgaslan.tasks.services.ITaskListService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/task-lists")
@@ -34,5 +36,24 @@ public class TaskListController implements ITaskListController {
     public TaskListDto create(@RequestBody TaskListDto dto) {
         var result = service.create(mapper.toEntity(dto));
         return mapper.toDto(result);
+    }
+
+    @GetMapping("/{id}")
+    @Override
+    public Optional<TaskListDto> getById(@PathVariable UUID id) {
+        return service.getById(id).map(mapper::toDto);
+    }
+
+    @PutMapping("/{id}")
+    @Override
+    public TaskListDto update(@PathVariable UUID id, @RequestBody TaskListDto dto) {
+        var result = service.update(id, mapper.toEntity(dto));
+        return mapper.toDto(result);
+    }
+
+    @DeleteMapping("/{id}")
+    @Override
+    public void delete(@PathVariable UUID id) {
+        service.delete(id);
     }
 }
