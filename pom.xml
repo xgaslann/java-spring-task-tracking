@@ -12,7 +12,7 @@
     <artifactId>tasks</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tasks</name>
-    <description>tasks</description>
+    <description>A task tracking app</description>
     <url/>
     <licenses>
         <license/>
