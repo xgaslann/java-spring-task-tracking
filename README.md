@@ -100,11 +100,11 @@ I want to be able to see my task list’s task completion progress
 
 So that I can stay motivated and understand my productivity
 
-Acceptance Criteria
+#### Acceptance Criteria
 
 Users are informed of their completion percentage of tasks in a task list
 
-Bonus Features
+#### Bonus Features
 Users can set reminders for important tasks.
 The app should provide a way to filter and sort tasks based on due date, priority, or list.
 The app should provide a dashboard showing task completion statistics.
