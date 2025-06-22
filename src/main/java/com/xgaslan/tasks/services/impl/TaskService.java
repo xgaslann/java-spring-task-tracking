@@ -6,6 +6,7 @@ import com.xgaslan.tasks.domain.entities.TaskStatus;
 import com.xgaslan.tasks.repositories.ITaskListRepository;
 import com.xgaslan.tasks.repositories.ITaskRepository;
 import com.xgaslan.tasks.services.ITaskService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -59,6 +60,7 @@ public class TaskService implements ITaskService {
         return repository.findByTaskListIdAndId(taskListId, id);
     }
 
+    @Transactional
     @Override
     public Task update(UUID taskListId, UUID id, Task entity) {
         if (null != entity.getId() && !entity.getId().equals(id)) {
@@ -86,10 +88,16 @@ public class TaskService implements ITaskService {
         return repository.save(existingTask);
     }
 
+    @Transactional
     @Override
     public void delete(UUID taskListId, UUID id) {
-        var task = repository.findByTaskListIdAndId(taskListId, id).orElseThrow(() -> new IllegalArgumentException("Task with ID " + id + " does not exist in task list " + taskListId));
-
-        repository.delete(task);
+        repository.deleteByTaskListIdAndId(taskListId, id);
     }
+
+//    @Override
+//    public void delete(UUID taskListId, UUID id) {
+//        var task = repository.findByTaskListIdAndId(taskListId, id).orElseThrow(() -> new IllegalArgumentException("Task with ID " + id + " does not exist in task list " + taskListId));
+//
+//        repository.delete(task);
+//    }
 }
